@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { ContactsCollection } from "../api/ContactsCollection";
 import styles from "./css_modules/ContactForm.css"
+import { Meteor } from "meteor/meteor"
+
 const ContactForm = () => {
 
     const [name, setName] = useState("");
@@ -8,10 +9,17 @@ const ContactForm = () => {
     const [url, setUrl] = useState("");
 
     const saveContact = () =>{
-        setEmail("");
-        setName("");
-        setUrl("");
-        ContactsCollection.insert({name, email, url});
+      //ContactsCollection.insert({name, email, url}); // Esta línea no debería estar en el lado del cliente, por esta razón 
+      //se crea en lugar de esto, un llamado a un método de meteor que se crea en la carpeta "api" y se invoca en el lado del servidor
+      Meteor.call('insert.contact', {name, email, url}, (errorResponse)=>{
+        if(errorResponse){
+          alert(errorResponse.error);
+        }else{
+          setEmail("");
+          setName("");
+          setUrl("");
+        }
+      })  //Esto es el equivalente a utilizar fetch, llamamos a un método, envíamos parámetros y recibimos un error
     }
 
 
