@@ -1,0 +1,23 @@
+form{
+    display: flex;
+    justify-content: center;
+    column-gap: 2vw;
+}
+form div{
+    display: flex;
+    column-gap: 5px;
+}
+
+h1{
+    text-align: center;
+}
+
+.container_head{
+    background-color: rgb(21, 21, 240);
+    height: 20vh;
+    color: white;
+}
+body{
+    padding: 0;
+    margin: 0;
+}

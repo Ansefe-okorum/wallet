@@ -1,0 +1,32 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: 10vw;
+    margin-top: 0;
+}
+
+h3{
+    font-size: 1.5em;
+}
+
+.container ul{
+    list-style-type: none;
+}
+
+.container ul li{
+    border-top: 1px solid gray;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    padding-top: 3vh;
+}
+
+.datos p{
+    margin-bottom: 0;
+    margin-top: 0;
+}
+img{
+    border-radius: 150px;
+    height: 10vh;
+}

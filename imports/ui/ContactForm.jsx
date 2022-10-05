@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ContactsCollection } from "../api/ContactsCollection";
-
+import styles from "./css_modules/ContactForm.css"
 const ContactForm = () => {
 
     const [name, setName] = useState("");
