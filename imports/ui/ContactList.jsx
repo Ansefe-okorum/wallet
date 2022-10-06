@@ -1,14 +1,25 @@
-import React from "react";
-import { useTracker } from "meteor/react-meteor-data";
+import React, { memo }from "react";
+import { useSubscribe, useFind } from "meteor/react-meteor-data";
 import { ContactsCollection } from "../api/ContactsCollection";
 import styles from "./css_modules/ContactList.css";
 import { Meteor } from "meteor/meteor";
 
 export const ContactList = () => {
   //Tracker es un recurso de meteor que permite sincronizarse con la base de datos y actualizarse cada que detecta un cambio
-  let contacts = useTracker(() => {
-    return ContactsCollection.find({}, {sort:{createdAt:-1}}).fetch();
-  });
+  // let contacts = useTracker(() => {
+  //   return ContactsCollection.find({}, {sort:{createdAt:-1}}).fetch();
+  // });
+
+  const isLoading = useSubscribe("allContacts"); //Este hoock recibe el nombre del publish de la carpeta api, devuelve una función que si encuentra la información retorna false, mientras la está buscando retorna true;
+  console.log(isLoading);
+  const contacts = useFind(()=>{ //Este hook trae la información de la base de datos
+    return ContactsCollection.find({}, {sort:{createdAt:-1}}); //Esto retorna un cursor
+  }
+  );
+
+  if(isLoading()){
+    return <p>Loading...</p>  //ContactList retornará esto mientras no se encuentre la información en la base de datos
+  }
 
   const removeContact = (_id)=>{
     Meteor.call("remove.contact", {contactID: _id}, (errorResponse)=>{
@@ -17,6 +28,19 @@ export const ContactList = () => {
       }
     })
   }
+
+  const ContactItem = memo((props)=>{ //Se debe agregar el key como props para que react no de error
+    return(
+      <li key={props._id}>
+        <img src={props.url} alt={props._id}/>
+        <div>
+          <p>{props.name}</p>
+          <p>{props.email}</p>
+        </div>
+        <button onClick={()=> removeContact(props._id)}>Delete</button>
+    </li> 
+    );
+  });
   
 
   return (
@@ -24,14 +48,7 @@ export const ContactList = () => {
       <h3>Contact List</h3>
       <ul>
         {contacts.map((contact) => (
-          <li key={contact._id}>
-            <img src={contact.url} alt={contact._id}/>
-            <div>
-              <p>{contact.name}</p>
-              <p>{contact.email}</p>
-            </div>
-            <button onClick={()=> removeContact(contact._id)}>Delete</button>
-          </li> //Se debe agregar el key como props para que react no de error
+          <ContactItem _id={contact._id} name={contact.name} email={contact.email} url={contact.url}/>
         ))}
       </ul>
     </div>

@@ -2,6 +2,7 @@ import { Meteor } from "meteor/meteor";
 import { ContactsCollection } from "./ContactsCollection";
 import { check } from "meteor/check";
 
+//Los métodos permiten modificar una base de datos, estos se encuentran del lado del servidor y son llamados desde el cliente
 Meteor.methods({
   "insert.contact"({ name, email, url }) {
     if(!name){
