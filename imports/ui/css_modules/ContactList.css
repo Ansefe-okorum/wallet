@@ -28,5 +28,10 @@ h3{
 }
 img{
     border-radius: 150px;
-    height: 10vh;
+    height: 9vh;
+}
+.contactListTrans{
+    display: flex;
+    align-items: center;
+    column-gap: 3vw;
 }

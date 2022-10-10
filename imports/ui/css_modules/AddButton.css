@@ -1,0 +1,26 @@
+.container{
+    background-color: rgb(74, 96, 127);
+    width: 400px;
+    max-width: 40vw;
+    padding: 22px;
+    border-radius: 20px;
+    position: relative;
+    color: white;
+}
+
+.sendButton{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1vh;
+}
+
+p{
+    margin-bottom: 1vh;
+    margin-top: 1vh;
+}
+.textico{
+    margin-top:3vh;
+    text-align: center;
+    margin-bottom: 1vh;
+}
+

@@ -1,49 +1,70 @@
 import React, { useState } from "react";
 import styles from "./css_modules/ContactForm.css"
 import { Meteor } from "meteor/meteor"
+import WalletHub from "./WalletHub.jsx";
+import ErrorAlert from "./ErrorAlert";
+import SuccessAlert from "./SuccessAlert";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const ContactForm = () => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [url, setUrl] = useState("");
+    const [walletId, setWalletId] = useState("");
+
+    //estado para errores
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     const saveContact = () =>{
       //ContactsCollection.insert({name, email, url}); // Esta línea no debería estar en el lado del cliente, por esta razón 
       //se crea en lugar de esto, un llamado a un método de meteor que se crea en la carpeta "api" y se invoca en el lado del servidor
       Meteor.call('insert.contact', {name, email, url}, (errorResponse)=>{
         if(errorResponse){
-          alert(errorResponse.error);
+          setError(errorResponse.error);
+          setTimeout(()=>setError(""), 4000);
         }else{
           setEmail("");
           setName("");
           setUrl("");
+          setSuccess("Contact Saved");
+          setTimeout(()=>setSuccess(""), 4000);
         }
       })  //Esto es el equivalente a utilizar fetch, llamamos a un método, envíamos parámetros y recibimos un error
     }
 
 
   return (
-    <form>
-      <div>
-        <label htmlFor="name">Name</label>
-        <input type="text" id="name" onChange={(e)=>{setName(e.target.value)}} value={name} />
+    <div>
+      <WalletHub/>
+      <div className={styles.alerts}>
+        {error&&<ErrorAlert error={error}/>}
+        {success&&<SuccessAlert success={success}/>}
       </div>
+      <form>
+        <div>
+          <TextField id="filled-basic" label="Name" variant="outlined" onChange={(e)=>{setName(e.target.value)}} color="secondary" focused sx={{ input: { color: 'white' } }} value={name}/>
+        </div>
 
-      <div>
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" onChange={(e)=>{setEmail(e.target.value)}} value={email}/>
-      </div>
+        <div>
+          <TextField id="filled-basic" label="Email" variant="outlined" onChange={(e)=>{setEmail(e.target.value)}} color="secondary" focused sx={{ input: { color: 'white' } }} value={email}/>
+        </div>
 
-      <div>
-        <label htmlFor="imgURL">Image URL</label>
-        <input type="text" id="imgURL" onChange={(e)=>{setUrl(e.target.value)}} value={url}/>
-      </div>
+        <div>
+          <TextField id="filled-basic" label="Img Url" variant="outlined" onChange={(e)=>{setUrl(e.target.value)}} color="secondary" focused sx={{ input: { color: 'white' } }} value={url}/>
+        </div>
 
-      <div>
-        <button type="button" onClick={saveContact}>Save Contact</button>
-      </div>
-    </form>
+      </form>
+        <div className={styles.wallet_button}>
+          <div className={styles.walletInput}>
+            <TextField id="filled-basic" label="Wallet ID" variant="outlined" onChange={(e)=>{setWalletId(e.target.value)}} color="secondary" focused sx={{ input: { color: 'white' } }} value={walletId}/>
+          </div>
+            <Button variant="contained" onClick={saveContact}>Save Contact</Button>
+        </div>
+
+      </div>  
   );
 };
 

@@ -10,6 +10,7 @@ Meteor.methods({
     }
     return ContactsCollection.insert({ name, email, url, createdAt: new Date()});
   },
+  
   "remove.contact"({contactID}){
     check(contactID, String);
     return ContactsCollection.remove(contactID);

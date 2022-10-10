@@ -3,6 +3,6 @@ import {ContactsCollection} from "./ContactsCollection";
 
 Meteor.publish(
     'allContacts', function(){
-        return ContactsCollection.find(); //Esta es la forma en la que el servidor se comunica con el cliente, pero solo en lectura
+        return ContactsCollection.find({}); //Esta es la forma en la que el servidor se comunica con el cliente, pero solo en lectura
     }
 );

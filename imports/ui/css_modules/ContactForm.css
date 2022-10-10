@@ -15,11 +15,28 @@ h1{
 }
 
 .container_head{
-    background-color: rgb(21, 21, 240);
-    height: 20vh;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
     color: white;
+    padding-bottom: 3vh;
 }
 body{
     padding: 0;
     margin: 0;
+}
+.alerts{
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2vh;
+}
+.wallet_button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.walletInput{
+    width: 60%;
 }
