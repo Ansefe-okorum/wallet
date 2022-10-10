@@ -3,7 +3,7 @@ import AddButton from "./AddButton.jsx";
 import TransferButton from "./TransferButton.jsx";
 import styles from "./css_modules/WalletHub.css";
 import { Typography } from "@mui/material";
-import { WalletsCollection } from "../api/WalletsCollection";
+import { WalletsCollection } from "../api/Collections/WalletsCollection";
 import { useSubscribe, useFind } from "meteor/react-meteor-data";
 
 const WalletHub = () => {

@@ -17,6 +17,7 @@ const TransferButton = (props) => {
             if(errorResponse){
                 console.log(errorResponse.error);
             } else{
+                console.log(destinationWallet, transferAmount);
                 setDestinationWallet("");
                 setTransferAmount(0);
             }
@@ -36,7 +37,7 @@ const TransferButton = (props) => {
             
             <ContactSelector destinationWallet={destinationWallet} setDestinationWallet={setDestinationWallet}/>
             <p>Name</p>
-            <TextField id="outlined-basic" label="Amount" variant="outlined" type="number" fullWidth onChange={(e)=>{setTransferAmount(Number(e.target.value))}}/>
+            <TextField id="outlined-basic" label="Amount" variant="outlined" type="number" fullWidth onChange={(e)=>{setTransferAmount(Number(e.target.value))}} value={transferAmount}/>
             <div className={styles.sendButton}>
                 <Button variant="contained" onClick={tranferMoney}>Send</Button>
             </div>

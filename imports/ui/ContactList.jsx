@@ -1,6 +1,6 @@
 import React, { memo }from "react";
 import { useSubscribe, useFind } from "meteor/react-meteor-data";
-import { ContactsCollection } from "../api/ContactsCollection";
+import { ContactsCollection } from "../api/Collections/ContactsCollection";
 import styles from "./css_modules/ContactList.css";
 import { Meteor } from "meteor/meteor";
 
@@ -35,12 +35,14 @@ export const ContactList = () => {
   }
 
   const ContactItem = memo((props)=>{ //Se debe agregar el key como props para que react no de error
+    
     return(
       <li>
         <img src={props.url} alt={props._id}/>
         <div>
           <p>{props.name}</p>
           <p>{props.email}</p>
+          <p>{props.walletId}</p>
         </div>
         <button onClick={()=> removeContact(props._id)}>Delete</button>
     </li> 
@@ -53,7 +55,7 @@ export const ContactList = () => {
       <h3>Contact List</h3>
       <ul>
         {contacts.map((contact) => (
-          <ContactItem key={contact._id} name={contact.name} email={contact.email} url={contact.url} _id={contact._id}/>
+          <ContactItem key={contact._id} name={contact.name} email={contact.email} url={contact.url} _id={contact._id} walletId={contact.walletId}/>
         ))}
       </ul>
     </div>

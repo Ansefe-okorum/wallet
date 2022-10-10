@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import { check } from "meteor/check";
-import { TransactionsCollection } from "./TransactionsCollection.js";
+import { TransactionsCollection } from "../Collections/TransactionsCollection.js";
 
 Meteor.methods({
     'Transactions.insert'({sourceWalletId, destinationWalletId, amount}){

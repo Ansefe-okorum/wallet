@@ -38,5 +38,7 @@ body{
     width: 100%;
 }
 .walletInput{
-    width: 60%;
+    width: 40%;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }

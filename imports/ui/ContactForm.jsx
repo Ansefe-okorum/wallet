@@ -21,7 +21,7 @@ const ContactForm = () => {
     const saveContact = () =>{
       //ContactsCollection.insert({name, email, url}); // Esta línea no debería estar en el lado del cliente, por esta razón 
       //se crea en lugar de esto, un llamado a un método de meteor que se crea en la carpeta "api" y se invoca en el lado del servidor
-      Meteor.call('insert.contact', {name, email, url}, (errorResponse)=>{
+      Meteor.call('insert.contact', {name, email, url, walletId}, (errorResponse)=>{
         if(errorResponse){
           setError(errorResponse.error);
           setTimeout(()=>setError(""), 4000);
@@ -29,6 +29,7 @@ const ContactForm = () => {
           setEmail("");
           setName("");
           setUrl("");
+          setWalletId("");
           setSuccess("Contact Saved");
           setTimeout(()=>setSuccess(""), 4000);
         }
@@ -59,7 +60,7 @@ const ContactForm = () => {
       </form>
         <div className={styles.wallet_button}>
           <div className={styles.walletInput}>
-            <TextField id="filled-basic" label="Wallet ID" variant="outlined" onChange={(e)=>{setWalletId(e.target.value)}} color="secondary" focused sx={{ input: { color: 'white' } }} value={walletId}/>
+            <TextField id="filled-basic" label="Wallet ID" variant="outlined" onChange={(e)=>{setWalletId(e.target.value)}} color="secondary" focused sx={{ input: { color: 'white' } }} value={walletId} fullWidth/>
           </div>
             <Button variant="contained" onClick={saveContact}>Save Contact</Button>
         </div>

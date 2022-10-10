@@ -1,5 +1,5 @@
 import { Meteor} from "meteor/meteor";
-import { WalletsCollection } from "./WalletsCollection.js";
+import { WalletsCollection } from "../Collections/WalletsCollection.js";
 
 
 Meteor.publish("wallets", function (){

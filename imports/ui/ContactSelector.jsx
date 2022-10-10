@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useSubscribe, useFind } from "meteor/react-meteor-data";
-import { ContactsCollection } from "../api/ContactsCollection";
+import { ContactsCollection } from "../api/Collections/ContactsCollection";
 import styles from "./css_modules/ContactList.css";
 
 export default function ContactSelector({destinationWallet, setDestinationWallet}) {
@@ -45,7 +45,8 @@ export default function ContactSelector({destinationWallet, setDestinationWallet
         >
             {contacts.map((contact)=>{
                 return(
-                    <MenuItem value={contact._id} key={contact._id}>
+                    // en onChange se toma el value de "MenuItem" y se guarda en destinationWallet, el value del select es solo lo que se muestra como seleccionado
+                    <MenuItem value={contact.walletId} key={contact._id}>  
                         <div className={styles.contactListTrans}>
                             <img src={contact.url} alt={contact.url}/>
                             <p>

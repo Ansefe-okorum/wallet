@@ -1,5 +1,5 @@
 import { Meteor } from "meteor/meteor";
-import {ContactsCollection} from "./ContactsCollection";
+import {ContactsCollection} from "../Collections/ContactsCollection";
 
 Meteor.publish(
     'allContacts', function(){
