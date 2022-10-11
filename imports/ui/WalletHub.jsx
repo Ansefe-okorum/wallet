@@ -31,7 +31,7 @@ const WalletHub = () => {
           <Typography variant="h5">{wallet.balance} {wallet.currency}</Typography>
         </div>
         <div className={styles.buttons}>
-          <AddButton />
+          <AddButton sourceWallet={wallet._id}/>
           <TransferButton sourceWallet={wallet._id}/>
         </div>
       </div>

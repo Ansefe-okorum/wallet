@@ -3,6 +3,8 @@ import { useSubscribe, useFind } from "meteor/react-meteor-data";
 import { ContactsCollection } from "../api/Collections/ContactsCollection";
 import styles from "./css_modules/ContactList.css";
 import { Meteor } from "meteor/meteor";
+import { WalletsCollection } from "../api/Collections/WalletsCollection";
+import { Typography } from "@mui/material";
 
 
 export const ContactList = () => {
@@ -21,10 +23,15 @@ export const ContactList = () => {
   }
   );
 
+  const isLoading4 = useSubscribe("wallets");
+  const wallets = useFind(()=>{
+    return WalletsCollection.find({});
+  });
 
-  if(isLoading3()){
+  if(isLoading3() || isLoading4()){
     return <p>Loading...</p>  //ContactList retornará esto mientras no se encuentre la información en la base de datos
   }
+
 
   const removeContact = (_id)=>{
     Meteor.call("remove.contact", {contactID: _id}, (errorResponse)=>{
@@ -40,10 +47,11 @@ export const ContactList = () => {
       <li>
         <img src={props.url} alt={props._id}/>
         <div>
-          <p>{props.name}</p>
-          <p>{props.email}</p>
-          <p>{props.walletId}</p>
+          <p>Name: {props.name}</p>
+          <p>Email: {props.email}</p>
+          <p>Wallet Id: {props.walletId}</p>
         </div>
+        <Typography variant="h5">{props.balance} USD</Typography>
         <button onClick={()=> removeContact(props._id)}>Delete</button>
     </li> 
     );
@@ -54,9 +62,13 @@ export const ContactList = () => {
     <div className={styles.container}>
       <h3>Contact List</h3>
       <ul>
-        {contacts.map((contact) => (
-          <ContactItem key={contact._id} name={contact.name} email={contact.email} url={contact.url} _id={contact._id} walletId={contact.walletId}/>
-        ))}
+        {contacts.map((contact, index) => {
+          const wallet = wallets.filter((objeto)=>contact.walletId==objeto.walletId);
+          return(
+            <ContactItem key={contact._id} name={contact.name} email={contact.email} url={contact.url} _id={contact._id} walletId={contact.walletId} balance={wallet[0].balance}/>
+          )
+        }
+        )}
       </ul>
     </div>
   );

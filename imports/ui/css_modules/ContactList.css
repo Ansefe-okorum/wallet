@@ -1,8 +1,15 @@
 .container{
     display: flex;
     flex-direction: column;
-    margin: 10vw;
+    margin: 30vw;
     margin-top: 0;
+    margin-bottom: 10vh;
+    
+}
+body{
+    background: #b7dbad;
+    background: -webkit-linear-gradient(0deg, #b7dbad 0%, #d7d7d7 100%);
+    background: linear-gradient(0deg, #b7dbad 0%, #d7d7d7 100%);
 }
 
 h3{
@@ -18,8 +25,9 @@ h3{
     padding: 0px;
     display: flex;
     align-items: center;
-    column-gap: 20px;
+    column-gap: 30px;
     padding-top: 3vh;
+    justify-content: space-between;
 }
 
 .datos p{

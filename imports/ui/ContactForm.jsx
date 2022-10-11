@@ -30,7 +30,7 @@ const ContactForm = () => {
           setName("");
           setUrl("");
           setWalletId("");
-          setSuccess("Contact Saved");
+          setSuccess("Contact Saved");          
           setTimeout(()=>setSuccess(""), 4000);
         }
       })  //Esto es el equivalente a utilizar fetch, llamamos a un método, envíamos parámetros y recibimos un error
@@ -46,7 +46,7 @@ const ContactForm = () => {
       </div>
       <form>
         <div>
-          <TextField id="filled-basic" label="Name" variant="outlined" onChange={(e)=>{setName(e.target.value)}} color="secondary" focused sx={{ input: { color: 'white' } }} value={name}/>
+          <TextField id="filled-basic" label="Name" variant="outlined" onChange={(e)=>{setName(e.target.value)}} color="secondary" focused sx={{ input: { color: 'white' }, color: "gray" }} value={name}/>
         </div>
 
         <div>
